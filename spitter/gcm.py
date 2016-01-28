@@ -1,4 +1,4 @@
-import requests
+import grequests
 
 from spitter import logger
 
@@ -9,18 +9,14 @@ def send_notification(body, tokens):
         "Authorization": "key=AIzaSyCaenkjxddv7_rjNdXnzw4M6Ri-mstPW4Q"
     }
 
-    for token in tokens:
-        payload = {
-            "data": {"message": body},
-            "to": token}
+    payload = {"data": {"message": body}, "registration_ids": tokens}
 
-        logger.info("sending notification - %s", payload)
+    url = "https://gcm-http.googleapis.com/gcm/send"
+    response = irequests.post(url, json=payload, headers=config)
 
-        resp = requests.post("https://gcm-http.googleapis.com/gcm/send",
-                                json=payload,
-                                headers=config)
+    logger.info("sending notification - %s", str(response))
 
-        if not resp.status_code == 200:
-            logger.warn("notification not sent - %s", str(resp.text))
+    if not response.status_code == 200:
+        logger.warn("notification not sent - %s", str(response.text))
 
-        logger.info("notification sent - %s", str(resp.text))
+    logger.info("notification sent - %s", str(response.text))
