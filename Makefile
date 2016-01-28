@@ -6,5 +6,5 @@ REDIS=redis-server
 run:
 	$(PYTHON) -m spitter
 
-start-redis:
+redis:
 	$(REDIS)
