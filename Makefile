@@ -3,7 +3,7 @@ REDIS=redis-server
 
 .PHONY: run start-redis dashboard
 
-run:
+worker:
 	$(PYTHON) -m spitter
 
 redis:
@@ -11,3 +11,6 @@ redis:
 
 dashboard:
 	rq-dashboard
+
+enqueuer:
+	$(PYTHON) loader.py 

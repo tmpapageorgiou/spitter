@@ -3,14 +3,13 @@ import requests
 from spitter import logger
 
 
-class GCM
+def send_notification(body, tokens):
+    config = {
+        "Content-Type": "application/json",
+        "Authorization": "key=AIzaSyCaenkjxddv7_rjNdXnzw4M6Ri-mstPW4Q"
+    }
 
-    @staticmethod
-    def send_notificatin(body, token):
-        config = {
-            "Content-Type": "application/json",
-            "Authorization": "key=AIzaSyCaenkjxddv7_rjNdXnzw4M6Ri-mstPW4Q"
-        }
+    for token in tokens:
         payload = {
             "data": {"message": body},
             "to": token}
@@ -18,8 +17,8 @@ class GCM
         logger.info("sending notification - %s", payload)
 
         resp = requests.post("https://gcm-http.googleapis.com/gcm/send",
-                             json=payload,
-                             headers=config)
+                                json=payload,
+                                headers=config)
 
         if not resp.status_code == 200:
             logger.warn("notification not sent - %s", str(resp.text))
