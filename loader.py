@@ -1,10 +1,10 @@
 import os
 import time
 
-from rq import Connection
-from rq import Queue
+from rq import Connection, Queue
 
 from spitter.connection import redis_conn
+
 
 REPETITION = 10
 

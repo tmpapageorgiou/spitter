@@ -13,4 +13,4 @@ dashboard:
 	rq-dashboard
 
 enqueuer:
-	$(PYTHON) loader.py 
+	$(PYTHON) loader.py
