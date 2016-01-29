@@ -1,4 +1,4 @@
-import grequests
+import requests
 
 from spitter import logger
 
@@ -9,10 +9,17 @@ def send_notification(body, tokens):
         "Authorization": "key=AIzaSyCaenkjxddv7_rjNdXnzw4M6Ri-mstPW4Q"
     }
 
-    payload = {"data": {"message": body}, "registration_ids": tokens}
+    payload = {
+        "registration_ids": tokens,
+        "data": {
+            "title": "title",
+            "body": "body",
+            "message": body,
+            "icon": "myicon"}
+    }
 
     url = "https://gcm-http.googleapis.com/gcm/send"
-    response = irequests.post(url, json=payload, headers=config)
+    response = requests.post(url, json=payload, headers=config)
 
     logger.info("sending notification - %s", str(response))
 

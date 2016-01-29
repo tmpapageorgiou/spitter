@@ -1,16 +1,16 @@
 PYTHON=python
 REDIS=redis-server
 
-.PHONY: run start-redis dashboard
+.PHONY: worker enqueuer redis dashboard
 
 worker:
 	$(PYTHON) -m spitter
+
+enqueuer:
+	$(PYTHON) -m enqueuer
 
 redis:
 	$(REDIS)
 
 dashboard:
 	rq-dashboard
-
-enqueuer:
-	$(PYTHON) loader.py
