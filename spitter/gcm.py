@@ -13,7 +13,6 @@ def send_notification(body, tokens):
         "registration_ids": tokens,
         "data": {
             "title": "title",
-            "body": "body",
             "message": body,
             "icon": "myicon"}
     }
